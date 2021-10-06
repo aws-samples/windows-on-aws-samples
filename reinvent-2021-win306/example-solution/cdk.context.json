@@ -1,0 +1,20 @@
+{
+  "availability-zones:account=117923233529:region=us-east-1": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c",
+    "us-east-1d",
+    "us-east-1e",
+    "us-east-1f"
+  ],
+  "ami:account=117923233529:filters.image-type.0=machine:filters.name.0=*Windows_Server-2022-English-Core-Base*:filters.platform.0=windows:filters.state.0=available:region=us-east-1": "ami-071a641a61c527fa9",
+  "availability-zones:account=322088831639:region=us-east-1": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c",
+    "us-east-1d",
+    "us-east-1e",
+    "us-east-1f"
+  ],
+  "ami:account=322088831639:filters.image-type.0=machine:filters.name.0=*Windows_Server-2022-English-Core-Base*:filters.platform.0=windows:filters.state.0=available:region=us-east-1": "ami-071a641a61c527fa9"
+}
