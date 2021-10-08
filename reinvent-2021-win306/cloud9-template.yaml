@@ -1,0 +1,135 @@
+Resources:
+  Cloud9VPC9ECB8B29:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: default
+      Tags:
+        - Key: Name
+          Value: Win306Workshop/Cloud9VPC
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/Resource
+  Cloud9VPCPublicSubnet1Subnet83C59F37:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: 10.0.0.0/17
+      VpcId:
+        Ref: Cloud9VPC9ECB8B29
+      AvailabilityZone: us-east-1a
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: aws-cdk:subnet-name
+          Value: Public
+        - Key: aws-cdk:subnet-type
+          Value: Public
+        - Key: Name
+          Value: Win306Workshop/Cloud9VPC/PublicSubnet1
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/PublicSubnet1/Subnet
+  Cloud9VPCPublicSubnet1RouteTableCB590F88:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: Cloud9VPC9ECB8B29
+      Tags:
+        - Key: Name
+          Value: Win306Workshop/Cloud9VPC/PublicSubnet1
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/PublicSubnet1/RouteTable
+  Cloud9VPCPublicSubnet1RouteTableAssociation0AD6C990:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: Cloud9VPCPublicSubnet1RouteTableCB590F88
+      SubnetId:
+        Ref: Cloud9VPCPublicSubnet1Subnet83C59F37
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/PublicSubnet1/RouteTableAssociation
+  Cloud9VPCPublicSubnet1DefaultRoute722FC8B4:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: Cloud9VPCPublicSubnet1RouteTableCB590F88
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: Cloud9VPCIGWB8C7B5EB
+    DependsOn:
+      - Cloud9VPCVPCGW61CE11B8
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/PublicSubnet1/DefaultRoute
+  Cloud9VPCIsolatedSubnet1Subnet49527AAE:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: 10.0.128.0/17
+      VpcId:
+        Ref: Cloud9VPC9ECB8B29
+      AvailabilityZone: us-east-1a
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: aws-cdk:subnet-name
+          Value: Isolated
+        - Key: aws-cdk:subnet-type
+          Value: Isolated
+        - Key: Name
+          Value: Win306Workshop/Cloud9VPC/IsolatedSubnet1
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/IsolatedSubnet1/Subnet
+  Cloud9VPCIsolatedSubnet1RouteTable1BA359C1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: Cloud9VPC9ECB8B29
+      Tags:
+        - Key: Name
+          Value: Win306Workshop/Cloud9VPC/IsolatedSubnet1
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/IsolatedSubnet1/RouteTable
+  Cloud9VPCIsolatedSubnet1RouteTableAssociation9227A277:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: Cloud9VPCIsolatedSubnet1RouteTable1BA359C1
+      SubnetId:
+        Ref: Cloud9VPCIsolatedSubnet1Subnet49527AAE
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/IsolatedSubnet1/RouteTableAssociation
+  Cloud9VPCIGWB8C7B5EB:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: Win306Workshop/Cloud9VPC
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/IGW
+  Cloud9VPCVPCGW61CE11B8:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: Cloud9VPC9ECB8B29
+      InternetGatewayId:
+        Ref: Cloud9VPCIGWB8C7B5EB
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9VPC/VPCGW
+  Cloud9EnvD28F4C4F:
+    Type: AWS::Cloud9::EnvironmentEC2
+    Properties:
+      InstanceType: m5.large
+      SubnetId:
+        Ref: Cloud9VPCPublicSubnet1Subnet83C59F37
+    Metadata:
+      aws:cdk:path: Win306Workshop/Cloud9Env/Resource
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAA/02QwW7CMAyGn2X3ENYyaeIGqqppJ6oycU9dTwsUGyVO0RTl3Wk2WHfy78+/bdmFLsqVfn7amKtfQH9aRmCHOu7FwEm16Dk4QFV90i7IJYiqmLy4AJLZo55Ubo8IpY6HC+TSoalUE7rBwj50hD/2WbUcBD9MN+DMZ7b1nsEasUx/ZtU4OxrBecY7CbpJv030ar7vS+/ZVqYDvs5IkhQMHPq1jjWUNY3WMWWe/f/SuipTSoq4R330y7F40cXr9Jijt3bhAok9o25/4w2wjPaUNQEAAA==
+    Metadata:
+      aws:cdk:path: Win306Workshop/CDKMetadata/Default
+Outputs:
+  EECloud9url:
+    Value:
+      Fn::Join:
+        - ""
+        - - https://us-east-1.console.aws.amazon.com/cloud9/ide/
+          - Ref: Cloud9EnvD28F4C4F

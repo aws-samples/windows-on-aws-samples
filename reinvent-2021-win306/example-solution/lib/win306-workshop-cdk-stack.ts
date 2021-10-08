@@ -15,7 +15,7 @@ export class Win306WorkshopBaseStack extends cdk.Stack {
 
     // EventEngine Template 3 minutes
     const c9env = new cloud9.Ec2Environment(this, "Cloud9Env", {
-      vpc: new ec2.Vpc(this, "Cloud9VPC", { maxAzs: 1 }),
+      vpc: new ec2.Vpc(this, "Cloud9VPC", { maxAzs: 1,natGateways: 0 }),
       instanceType: new ec2.InstanceType("m5.large"),
     });
 
