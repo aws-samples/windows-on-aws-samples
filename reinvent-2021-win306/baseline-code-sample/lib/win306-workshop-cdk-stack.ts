@@ -75,6 +75,8 @@ export class Win306Module2 extends cdk.Stack {
     super(scope, id, props);
     // APPLYING PRINCIPLE #1: AUTOMATICALLY RECOVER FROM FAILURE
 
+    // Cloudwatch Dashboard
+
     // CPU Monitoring
 
     // Network Throughput
@@ -82,8 +84,6 @@ export class Win306Module2 extends cdk.Stack {
     // System Check
 
     // Instance Check
-
-    // Cloudwatch Dashboard
   }
 }
 export class Win306Module3 extends cdk.Stack {
