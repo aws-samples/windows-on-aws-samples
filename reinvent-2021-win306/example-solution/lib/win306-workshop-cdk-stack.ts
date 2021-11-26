@@ -147,12 +147,12 @@ export class Win306Module2 extends cdk.Stack {
       },
     });
 
-    const MB_threshold = 10; // value in megabytes
+    const MB_threshold = 625; //  Instance throughput value in Megabytes (5Gbps)
 
     const unusualNetworkAlarm = new cw.Alarm(this, "unusuallyHighTraffic", {
       evaluationPeriods: 1,
       datapointsToAlarm: 1,
-      threshold: MB_threshold * 1000 * 1000,
+      threshold: MB_threshold * 8, // MBps to Mbps
       metric: totalNetworkMetric,
     });
 
@@ -432,7 +432,6 @@ export class Win306Module4 extends cdk.Stack {
       value: `http://${alb.loadBalancerDnsName}`,
     });
 
-    // Remember to remove
     listener.addAction("default", {
       action: loadbalancer.ListenerAction.fixedResponse(200),
     });
@@ -442,7 +441,7 @@ export class Win306Module4 extends cdk.Stack {
       "WindowsInstancesCapacity",
       {
         vpc: Module1.infra,
-        minCapacity: 3, // 1,2,3 cdk taking care of the distrubition
+        minCapacity: 3, // 1,2,3 cdk taking care of the distribution
         maxCapacity: 10,
         instanceType: new ec2.InstanceType("t3.medium"),
         machineImage: Module1.machineImage,
