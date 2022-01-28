@@ -1,5 +1,3 @@
-# [https://catalog.us-east-1.prod.workshops.aws/v2/workshops/a9ae9061-fef9-43d8-918b-39835ece04a9/en-US/](Link to the workshop)
-
 # Welcome
 
 This workshop presents a new way to design your application using the Well-Architected Reliability Pillar. 
@@ -12,3 +10,5 @@ The code samples in this workshop have been published to this AWS-Samples GitHub
 
 This is a 200-300 level workshop suitable for infrastructure, developers, and operations engineers that have experience deploying and maintaining Windows Workloads.
 In this 2 hour workshop, you will learn Infrastructure-as-Code and design principles that allow you to reliably deploy your Microsoft workload using CDK(Cloud Development Kit) along with CloudWatch (monitoring) and Auto Scaling to improve the reliability and availability of your application.
+
+## [Link to the workshop](https://catalog.us-east-1.prod.workshops.aws/v2/workshops/a9ae9061-fef9-43d8-918b-39835ece04a9/en-US/)
